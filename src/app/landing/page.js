@@ -1,13 +1,21 @@
 "use client"
 
+import { useFirebase } from '../context/firebase';
 import { useState } from 'react';
-import Card from './Card';
+import Card from '../Card';
+import { useRouter } from 'next/navigation'
 
 const Landing = () => {
+
+  const fire=useFirebase();
+  const router = useRouter()
+
   const handleLogout = () => {
-    console.log('Logged out');
-    // Add your logout logic here
+    fire.logout();
   };
+
+  if(!fire.user)
+  router.push('/');
 
   const topics = [
     {
@@ -61,13 +69,15 @@ const Landing = () => {
   return (
     <div className="bg-[#212121] min-h-screen">
       <div className="flex justify-between items-center p-4 bg-[#212121] w-full fixed top-0 z-10">
-        <div className="text-white text-xl font-bold">
-          MyLogo
-        </div>
+      <div className="text-xl font-bold">
+        <span className="text-white">Lo</span>
+        <span className="text-white bg-cyan-400 rounded">GO</span>
+      </div>
+
         <div>
           <button
             onClick={handleLogout}
-            className="bg-white text-black py-2 px-4 rounded hover:bg-gray-300"
+            className="bg-[#212121] text-cyan-400 py-2 px-4 rounded"
           >
             Log Out
           </button>

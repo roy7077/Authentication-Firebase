@@ -56,7 +56,7 @@ export const FirebaseProvider = (props) => {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            return null;
+            alert('Wrong email and password');
         });
     }
 

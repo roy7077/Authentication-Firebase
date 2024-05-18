@@ -1,13 +1,13 @@
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
-import Landing from "./components/Landing";
+import Login from "./Login/page";
+import SignUp from "./signup/page";
+import Landing from "./landing/page";
 
 export default function Home() {
   return (
     <div className='h-40'>
       {/* <Landing/> */}
-      <Login/>
-      {/* <SignUp/> */}
+      {/* <Login/> */}
+      <SignUp/>
     </div>
   );
 }

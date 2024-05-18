@@ -1,13 +1,19 @@
 "use client"; // Ensure this file is treated as a client component
 
-import { useFirebase } from "../context/firebase";
+import { useFirebase } from '../context/firebase';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'
+import Link from 'next/link';
 
 export default function SignUp() {
   const fire = useFirebase();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+  const router = useRouter()
+
+  if(fire.user)
+    router.push('/landing');
+
   return (
     <div className="flex flex-col md:flex-row h-screen">
       {/* Left side - Image */}
@@ -51,19 +57,18 @@ export default function SignUp() {
               className="w-full px-4 py-2 bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
-              onClick={ ()=>{
+              onClick={() => {
                 console.log(email);
                 console.log(password);
                 fire.setUser(email,password);
-              }
-              }
+              }}
               className="w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-md"
             >
               Sign Up with Email
             </button>
           </div>
           <p className="text-gray-400 mt-4 text-center">
-            Already a user? <a href="/login" className="text-blue-400">Login</a>
+            Already a user? <Link href="/Login" className="text-blue-400">Login</Link>
           </p>
         </div>
       </div>

@@ -1,15 +1,18 @@
 "use client"; // Ensure this file is treated as a client component
 
-import { useFirebase } from "../context/firebase";
+import { useFirebase } from '../context/firebase';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Login() {
   const fire = useFirebase();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null);
+  const router = useRouter();
 
-  console.log("firebase -user ",fire.user)
+  if (fire.user) router.push('/landing');
+
   return (
     <div className="flex flex-col md:flex-row h-screen">
       {/* Left side - Image */}
@@ -22,7 +25,7 @@ export default function Login() {
       </div>
 
       {/* Right side - Login Form */}
-      <div className="w-full md:w-1/2 bg-[#212121] text-white flex items-center justify-center">
+      <div className="w-full  md:w-1/2 bg-[#212121] text-white flex items-center justify-center">
         <div className="max-w-md w-full p-6 bg-[#333332] border border-white rounded-md">
           <h1 className="text-4xl font-bold mb-6 text-center">Login</h1>
           <p className="text-xl mb-4 text-center">Choose a Login Method</p>
@@ -53,8 +56,8 @@ export default function Login() {
               className="w-full px-4 py-2 bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
-              onClick={()=>{
-                fire.emailLogin(email,password);
+              onClick={() => {
+                fire.emailLogin(email, password);
               }}
               className="w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded-md"
             >
@@ -62,7 +65,10 @@ export default function Login() {
             </button>
           </div>
           <p className="text-gray-400 mt-4 text-center">
-            Don't have an account? <a href="/signup" className="text-blue-400">Sign Up</a>
+            Don't have an account?{' '}
+            <Link href="/signup" className="text-blue-400">
+              Sign Up
+            </Link>
           </p>
         </div>
       </div>
