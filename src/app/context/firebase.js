@@ -3,16 +3,17 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword, getAuth, signInWithPopup, GoogleAuthProvider ,onAuthStateChanged,signOut} from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
+require('dotenv').config();
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCM24Iyu2gbB4Ge5CXL9cbTB_7KZ1K70qQ",
-    authDomain: "internshipauth.firebaseapp.com",
-    databaseURL: "https://internshipauth-default-rtdb.firebaseio.com",
-    projectId: "internshipauth",
-    storageBucket: "internshipauth.appspot.com",
-    messagingSenderId: "110542091351",
-    appId: "1:110542091351:web:987b2e26a6db8e987e5f12",
-    measurementId: "G-MEASUREMENT_ID" // Add measurement ID if available
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    databaseURL: process.env.databaseURL,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId,
+    measurementId: process.env.measurementId // Add measurement ID if available
 };
 
 const app = initializeApp(firebaseConfig);
